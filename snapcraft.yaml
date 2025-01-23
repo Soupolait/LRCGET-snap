@@ -1,0 +1,29 @@
+name: lrcget # you probably want to 'snapcraft register <name>'
+base: core24
+version: '0.1'
+summary: Téléchargez les paroles de vos musiques préférées.
+description: |
+  Utilitaire pour télécharger en masse les paroles synchronisées LRC pour votre bibliothèque de musiques hors-ligne.
+  LRCGET scannera l'ensemble des fichiers d'un répertoire donné, trouvera vos musiques, et téléchargera les paroles sous la forme d'un fichier LRC ayant le même nom que celui du fichier musical et stocké au même endroit.
+  LRCGET est le client officiel du service LRCLIB.
+grade: devel
+confinement: devmode
+
+apps:
+  lrcget:
+    extensions: [gnome]
+    command: bin/LRCGET
+    plugs:
+      - desktop
+      - x11
+      - wayland
+      - opengl
+
+parts:
+  LRCGET:
+    plugin: dump
+    source: src-tauri/target/release/
+    source-type: local
+    organize:
+      LRCGET: bin/LRCGET
+
